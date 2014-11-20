@@ -262,6 +262,13 @@ public OnPlayerConnect(playerid)
 
 public OnPlayerDisconnect(playerid)
 {
+	if(!IsPlayerNPC(playerid))
+	{
+		LoginAttempts[playerid] = 0;
+		IsLoggedIn[playerid] = 0;
+		aduty[playerid] = 0;
+		pShotBy[playerid] = INVALID_PLAYER_ID;
+	}
 	OnPlayerSave(playerid);
 	return 1;
 }
@@ -722,7 +729,9 @@ stock BanCheck(playerid)
 {
 	new pIP[16], query[500];
 	GetPlayerIp(playerid, pIP, 16);
-	mysql_format(MySQLCon, query, sizeof(query), "SELECT * FROM `bans` WHERE `ip` = '%s' ", pIP);
+	new pName[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, pName, MAX_PLAYER_NAME);
+	mysql_format(MySQLCon, query, sizeof(query), "SELECT * FROM `bans` WHERE `ip` = '%s' OR `username` = '%s'", pIP, pName);
  	mysql_tquery(MySQLCon, query, "", "");
   	new rows, fields;
  	cache_get_data(rows, fields, MySQLCon);
@@ -1165,3 +1174,5 @@ CMD:destroyvehicle(playerid, params[])
 	}
 	else return SendClientMessage(playerid, -1, "You are not allowed to perform this action.");
 }
+			
+	
