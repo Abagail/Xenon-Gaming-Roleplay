@@ -428,6 +428,9 @@ public OnPlayerText(playerid, text[])
         message[128];
     format(message, sizeof(message), "%s says: %s", GetName(playerid), text);
     SendAreaMessage(30.0, playerid, message, -1);
+	new string[245];
+	format(string, sizeof(string), "[CHAT]: %s(playerID: %d", message, playerid);
+	printf(string);
 	if(!IsPlayerInAnyVehicle(playerid)) ApplyAnimation(playerid, "PED", "IDLE_CHAT", 1, 0, 0, 0, 0, words*1000, 1);
 	// else RandCarChat(playerid, GetPlayerVehicleID(playerid), GetPlayerSeatID(playerid));
     return 0;
