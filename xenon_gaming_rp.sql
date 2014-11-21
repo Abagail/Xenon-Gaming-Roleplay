@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 11, 2014 at 04:44 PM
+-- Generation Time: Nov 21, 2014 at 01:29 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `dbdb`
+-- Database: `xenon`
 --
 
 -- --------------------------------------------------------
@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `bans` (
   `Reason` text NOT NULL,
   `Name` text NOT NULL,
   `Date` date NOT NULL,
+  `username` varchar(255) NOT NULL,
   `BanExp` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -88,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `VW` int(11) NOT NULL,
   `SkinID` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -97,30 +98,48 @@ CREATE TABLE IF NOT EXISTS `players` (
 --
 
 CREATE TABLE IF NOT EXISTS `settings` (
-  `MOTD` text NOT NULL
+  `MOTD` text NOT NULL,
+  `regstatus` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`MOTD`) VALUES
-('Welcome to Xenon Gaming RP!'),
-('Welcome to Xenon Gaming RP!'),
-('Welcome to Xenon Gaming RP!'),
-('Welcome to Xenon Gaming RP!'),
-('Welcome to Xenon Gaming RP!'),
-('Welcome to Xenon Gaming RP!'),
-('Welcome to Xenon Gaming RP!'),
-('Welcome to Xenon Gaming RP!'),
-('Welcome to Xenon Gaming RP!'),
-('Welcome to Xenon Gaming RP!'),
-('Welcome to Xenon Gaming RP!'),
-('Welcome to Xenon Gaming RP!'),
-('Welcome to Xenon Gaming RP!'),
-('Welcome to Xenon Gaming RP!'),
-('Welcome to Xenon Gaming RP!'),
-('Welcome to Xenon Gaming RP!');
+INSERT INTO `settings` (`MOTD`, `regstatus`) VALUES
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0),
+('Welcome to Xenon Gaming RP!', 0);
 
 -- --------------------------------------------------------
 
