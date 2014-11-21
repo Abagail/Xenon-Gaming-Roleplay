@@ -151,6 +151,7 @@ public OnGameModeInit()
     mysql_tquery(MySQLCon, query, "", "");
 	print("MOTD Set-Up."); }
 	LoadSpawn();
+	ManualVehicleEngineAndLights();
 	return 1;
 }
 
@@ -651,9 +652,9 @@ public OnPlayerRegister(playerid)
 forward KickEx(playerid, msg[]);
 public KickEx(playerid, msg[])
 {
-SendClientMessage(playerid, COLOR_RED, msg);
-SetTimerEx("KickPublic", 1000, false, "i", playerid);
-return true;
+	SendClientMessage(playerid, COLOR_RED, msg);
+	SetTimerEx("KickPublic", 1000, false, "i", playerid);
+	return true;
 }
 forward KickPublic(playerid);
 public KickPublic(playerid) { Kick(playerid); return 1; }
@@ -664,10 +665,10 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	{
 	    new engine, lights, alarm, doors, bonnet, boot, objective;
 		GetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective);
-		if(engine == VEHICLE_PARAMS_UNSET)
+		if(engine == VEHICLE_PARAMS_UNSET || VEHICLE_PARAMS_OFF)
 		{
-		SetVehicleParamsEx(vehicleid, 0, 0, alarm, doors, bonnet, boot, objective);
-		return SendClientMessage(playerid, COLOR_GREY, "The vehicle's engine is off.");
+			SetVehicleParamsEx(vehicleid, 0, 0, alarm, doors, bonnet, boot, objective);
+			return SendClientMessage(playerid, COLOR_GREY, "The vehicle's engine is off.");
 		}
 	}
 	return 1;
