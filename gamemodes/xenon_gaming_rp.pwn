@@ -1,4 +1,4 @@
-#include <a_samp>
+#include a_samp
 #include <a_mysql>
 #include <streamer>
 #include <zcmd>
@@ -311,7 +311,7 @@ public OnAccountCheck(playerid)
     if(rows)
     {
         cache_get_row(0, 2, pInfo[playerid][pPass], MySQLCon, 129);
-        pInfo[playerid][pID] = cache_get_row_int(0, 0);
+        pInfo[playerid][pID] = cache_get_field_content_int(0, "ID");
    		format(string, sizeof(string), "Before playing you must login\n\nUsername: %s\n\nEnter your password below and click login",PlayerName(playerid));
         ShowPlayerDialog(playerid,DIALOG_LOGIN,DIALOG_STYLE_PASSWORD,"{EDDC57}Login required",string,"Login","Cancel");
 	}
@@ -674,20 +674,20 @@ forward OnPlayerLogin(playerid);
 public OnPlayerLogin(playerid)
 {
 	SetPlayerColor(playerid, COLOR_WHITE);
-    pInfo[playerid][pAdmin] = cache_get_row_int(0, 4);
-    pInfo[playerid][pVip] = cache_get_row_int(0, 5);
-    pInfo[playerid][pMoney] = cache_get_row_int(0, 6);
-    pInfo[playerid][pScore] = cache_get_row_int(0, 7);
-    pInfo[playerid][pTrustedLevel] = cache_get_row_int(0, 8);
-    pInfo[playerid][pDeaths] = cache_get_row_int(0, 9);
-    pInfo[playerid][pKills] = cache_get_row_int(0, 10);
-    pInfo[playerid][pPos_x] = cache_get_row_float(0, 11);
-    pInfo[playerid][pPos_y] = cache_get_row_float(0, 12);
-    pInfo[playerid][pPos_z] = cache_get_row_float(0, 13);
-    pInfo[playerid][pPos_FacingAngle] = cache_get_row_float(0, 14);
-    pInfo[playerid][pInterior] = cache_get_row_int(0, 15);
-    pInfo[playerid][pVW] = cache_get_row_int(0, 15);
-	pInfo[playerid][pSkinID] = cache_get_row_int(0, 17);
+    pInfo[playerid][pAdmin] = cache_get_field_content_int(0, "Admin");
+    pInfo[playerid][pVip] = cache_get_field_content_int(0, "Vip");
+    pInfo[playerid][pMoney] = cache_get_field_content_int(0, "Money");
+    pInfo[playerid][pScore] = cache_get_field_content_int(0, "Score");
+    pInfo[playerid][pTrustedLevel] = cache_get_field_content_int(0, "TrustedLevel");
+    pInfo[playerid][pDeaths] = cache_get_field_content_int(0, "Deaths");
+    pInfo[playerid][pKills] = cache_get_field_content_int(0, "Kill");
+    pInfo[playerid][pPos_x] = cache_get_field_content_float(0, "X");
+    pInfo[playerid][pPos_y] = cache_get_field_content_float(0, "Y");
+    pInfo[playerid][pPos_z] = cache_get_field_content_float(0, "Z");
+    pInfo[playerid][pPos_FacingAngle] = cache_get_field_content_float(0, "FacingAngle");
+    pInfo[playerid][pInterior] = cache_get_field_content_int(0, "Interior");
+    pInfo[playerid][pVW] = cache_get_field_content_int(0, "VW");
+	pInfo[playerid][pSkinID] = cache_get_field_content_int(0, "SkinID");
 
 	TogglePlayerControllable(playerid, false);
     SetSpawnInfo(playerid,pInfo[playerid][pSkinID], 0, pInfo[playerid][pPos_x], pInfo[playerid][pPos_y], pInfo[playerid][pPos_z], pInfo[playerid][pPos_FacingAngle], 0, 0, 0, 0, 0, 0);
