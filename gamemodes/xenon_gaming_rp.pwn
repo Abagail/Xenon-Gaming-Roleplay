@@ -1,4 +1,4 @@
-#include a_samp
+#include <a_samp>
 #include <a_mysql>
 #include <streamer>
 #include <zcmd>
