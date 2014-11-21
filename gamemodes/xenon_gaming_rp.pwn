@@ -427,7 +427,7 @@ public OnPlayerText(playerid, text[])
     new
         message[128];
     format(message, sizeof(message), "%s says: %s", GetName(playerid), text);
-    ProxDetector(30.0, playerid, message, -1);
+    SendAreaMessage(30.0, playerid, message, -1);
 	if(!IsPlayerInAnyVehicle(playerid)) ApplyAnimation(playerid, "PED", "IDLE_CHAT", 1, 0, 0, 0, 0, words*1000, 1);
 	// else RandCarChat(playerid, GetPlayerVehicleID(playerid), GetPlayerSeatID(playerid));
     return 0;
@@ -598,13 +598,13 @@ stock GetName(playerid)
     return name;
 }
 
-stock ProxDetector(Float:radi, playerid, string[],color)
+stock SendAreaMessage(Float:arearadi, playerid, string[],color)
 {
     new Float:x,Float:y,Float:z;
     GetPlayerPos(playerid,x,y,z);
     foreach(Player,i)
     {
-        if(IsPlayerInRangeOfPoint(i,radi,x,y,z))
+        if(IsPlayerInRangeOfPoint(i,arearadi,x,y,z) && IsLoggedIn[playerid] == 1)
         {
             SendClientMessage(i,color,string);
         }
