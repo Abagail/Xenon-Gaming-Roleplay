@@ -238,10 +238,16 @@ public OnPlayerConnect(playerid)
 	SetPlayerColor(playerid, COLOR_WHITE); // Just white(FOR NOW).
 	new query[500];
 	SendClientMessage(playerid, -1, "Welcome to Xenon Gaming. Please wait.");
-    new name[MAX_PLAYER_NAME], first[MAX_PLAYER_NAME], last[MAX_PLAYER_NAME], ret;
-	#pragma unused ret
+    new name[MAX_PLAYER_NAME], first[MAX_PLAYER_NAME], last[MAX_PLAYER_NAME];
 	GetPlayerName(playerid,name,sizeof(name));
 	if(BanCheck(playerid) == 0) KickEx(playerid, "You are banned from this server.");
+	if(IsPlayerNPC(playerid))
+	{
+	    new pIP[16];
+	    GetPlayerIp(playerid, pIP, 16);
+	    if(!strcmp(pIP, "127.0.0.1", true)) return true;
+	    else return Kick(playerid);
+	}
 	if(RPName(name,first,last))
 	{
 	    mysql_format(MySQLCon, query, sizeof(query),"SELECT * FROM `players` WHERE `user` = '%e' LIMIT 1", PlayerName(playerid));
@@ -250,13 +256,6 @@ public OnPlayerConnect(playerid)
  		KickEx(playerid, "Your name is not suitable for a roleplaying enviorment. If you feel this is a mistake please contact an administrator");
  		SetPlayerVirtualWorld(playerid, 9218321);
  		Kick(playerid);
-	}
-	if(IsPlayerNPC(playerid))
-	{
-	    new pIP[16];
-	    GetPlayerIp(playerid, pIP, 16);
-	    if(!strcmp(pIP, "127.0.0.1", true)) return true;
-	    else return Kick(playerid);
 	}
 	return 1;
 }
@@ -300,6 +299,11 @@ public OnPlayerSave(playerid)
         PlayerName(playerid));
         mysql_tquery(MySQLCon, query, "", "");
         print(query);
+		if(pInfo[playerid][pAdmin] >= 1)
+		{
+		    mysql_format(MySQLCon, query, sizeof(query), "UPDATE `players` SET `AdminName`=%s WHERE `ID`=%d AND `user`='%e'", pInfo[playerid][pAName]);
+		    return true;
+		}
 	}
 	return 1;
 }
@@ -917,6 +921,7 @@ CMD:setforumname(playerid, params[])
 			SendClientMessage(giveplayerid, COLOR_RED, string);
 			format(string, sizeof(string), "You have set %s's forum name to %s.", GetName(giveplayerid), name);
 			SendClientMessage(playerid, COLOR_RED, string);
+			CallLocalFunction("OnPlayerSave", "d", playerid);
 			return 1;
 		}
 		else return SendClientMessage(playerid, COLOR_RED, "They aren't connected.");
@@ -1141,6 +1146,7 @@ CMD:v(playerid, params[])
 				return 1;
 			}
 		}
+		return true;
 	}
 	else return SendClientMessage(playerid, -1, "You are not allowed to perform this action.");
 }
