@@ -20,7 +20,6 @@
 #define COLOR_ERROR			0xFF0000FF
 #define COLOR_GREEN 		0x008000FF
 #define COLOR_WHITE			0xFFFFFFFF
-#define COLOR_PURPLE		0x9A00FFFF
 #define COLOR_RED           0xFF0000FF
 #define COLOR_YELLOW 		0xFFFF00FF
 #define COLOR_BLUE 			0x0080FFFF
@@ -255,17 +254,15 @@ public OnPlayerConnect(playerid)
 	} else {
  		KickEx(playerid, "Your name is not suitable for a roleplaying enviorment. If you feel this is a mistake please contact an administrator");
  		SetPlayerVirtualWorld(playerid, 9218321);
- 		Kick(playerid);
 	}
 	return 1;
 }
 
-public OnPlayerDisconnect(playerid)
+public OnPlayerDisconnect(playerid, reason)
 {
 	if(!IsPlayerNPC(playerid))
 	{
 		LoginAttempts[playerid] = 0;
-		IsLoggedIn[playerid] = 0;
 		aduty[playerid] = 0;
 		pShotBy[playerid] = INVALID_PLAYER_ID;
 	}
@@ -299,6 +296,7 @@ public OnPlayerSave(playerid)
         PlayerName(playerid));
         mysql_tquery(MySQLCon, query, "", "");
         print(query);
+        IsLoggedIn[playerid] = 0;
 		if(pInfo[playerid][pAdmin] >= 1)
 		{
 		    mysql_format(MySQLCon, query, sizeof(query), "UPDATE `players` SET `AdminName`=%s WHERE `ID`=%d AND `user`='%e'", pInfo[playerid][pAName]);
