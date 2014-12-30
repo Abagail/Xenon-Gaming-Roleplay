@@ -679,7 +679,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 forward OnPlayerLogin(playerid);
 public OnPlayerLogin(playerid)
 {
-	SetPlayerColor(playerid, COLOR_WHITE);
+    SetPlayerColor(playerid, COLOR_WHITE);
     pInfo[playerid][pAdmin] = cache_get_field_content_int(0, "Admin");
     pInfo[playerid][pVip] = cache_get_field_content_int(0, "Vip");
     pInfo[playerid][pMoney] = cache_get_field_content_int(0, "Money");
@@ -693,9 +693,9 @@ public OnPlayerLogin(playerid)
     pInfo[playerid][pPos_FacingAngle] = cache_get_field_content_float(0, "FacingAngle");
     pInfo[playerid][pInterior] = cache_get_field_content_int(0, "Interior");
     pInfo[playerid][pVW] = cache_get_field_content_int(0, "VW");
-	pInfo[playerid][pSkinID] = cache_get_field_content_int(0, "SkinID");
+    pInfo[playerid][pSkinID] = cache_get_field_content_int(0, "SkinID");
 
-	TogglePlayerControllable(playerid, false);
+    TogglePlayerControllable(playerid, false);
     SetSpawnInfo(playerid,pInfo[playerid][pSkinID], 0, pInfo[playerid][pPos_x], pInfo[playerid][pPos_y], pInfo[playerid][pPos_z], pInfo[playerid][pPos_FacingAngle], 0, 0, 0, 0, 0, 0);
     SpawnPlayer(playerid);
     GivePlayerMoney(playerid, pInfo[playerid][pMoney]);
